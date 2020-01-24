@@ -2,17 +2,18 @@ import React, {useState} from 'react';
  
 import useLocalStorage from './useLocalStorage';
 
-function useDarkMode() {
-    useLocalStorage('darkModeOn');
+function useDarkMode(key, initialValue) {
+    const [storedValue, setStoredValue] =  useLocalStorage(key, initialValue);
 
-    return thing ? JSON.parse(item) : someValue
-    const setValue = value => {                
-        setStoredValue(value);
-        //updating state to 'value'
-        window.localStorage.setItem(key, 
-        //.setItem() is used to save 'value' to localStorage.
-        //it will add the 'key' to localStorage object or update it if it already exists.
-        JSON.stringify(value));
-        //value is being converted to a JSON string.
-    return [value, setter];
-}
+   const toggleMode = () => {
+       setStoredValue(!storedValue);
+       if(storedValue) {
+        document.body.classList.add('dark-mode')
+       } else {
+           document.body.classList.remove('dark-mode')
+       }
+     }
+ 
+    return [storedValue, toggleMode];
+    }
+export default useDarkMode;
